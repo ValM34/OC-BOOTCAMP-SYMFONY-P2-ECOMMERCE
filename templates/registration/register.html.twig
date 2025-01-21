@@ -1,0 +1,45 @@
+{% extends 'auth.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+
+{% block image %}
+    <img src="/images/register.webp" alt="Inscription">
+{% endblock %}
+
+{% block form %}
+
+    {{ form_errors(registrationForm) }}
+
+    {{ form_start(registrationForm) }}
+        <h1>Inscription</h1>
+        {% block form_row %}
+            {{ form_label(registrationForm.lastName) }}
+            {{ form_widget(registrationForm.lastName) }}
+            {{ form_errors(registrationForm.lastName) }}
+
+            {{ form_label(registrationForm.firstName) }}
+            {{ form_widget(registrationForm.firstName) }}
+            {{ form_errors(registrationForm.firstName) }}
+
+            {{ form_label(registrationForm.email) }}
+            {{ form_widget(registrationForm.email) }}
+            {{ form_errors(registrationForm.email) }}
+
+            {{ form_label(registrationForm.plainPassword.first) }}
+            {{ form_widget(registrationForm.plainPassword.first) }}
+            {{ form_errors(registrationForm.plainPassword.first) }}
+
+            {{ form_label(registrationForm.plainPassword.second) }}
+            {{ form_widget(registrationForm.plainPassword.second) }}
+            {{ form_errors(registrationForm.plainPassword.second) }}
+
+            {{ form_widget(registrationForm.agreeTerms) }}
+            {{ form_label(registrationForm.agreeTerms) }}
+            {{ form_errors(registrationForm.agreeTerms) }}
+        {% endblock %}
+
+        <button type="submit" class="btn">S'inscrire</button>
+        <a class="not-auth" href="{{ path('app_login') }}">Déjà un compte ? Se connecter</a>
+    {{ form_end(registrationForm) }}
+{% endblock %}
