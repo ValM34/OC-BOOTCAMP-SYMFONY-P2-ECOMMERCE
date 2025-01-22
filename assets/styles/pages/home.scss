@@ -1,0 +1,203 @@
+.home-main {
+  .hero-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - $header-height - $footer-height);
+
+    .hero-section-content {
+      padding: 0 170px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: $light-green;
+
+      h1 {
+        font-size: 64px;
+        font-weight: 500;
+        line-height: 78px;
+        margin-bottom: 38px;
+      }
+
+      p {
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 22px;
+      }
+    }
+
+    .hero-section-image {
+      position: relative;
+
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .products-section {
+
+    .products-section-title-container {
+      height: 91px;
+      display: flex;
+      align-items: center;
+      padding-left: 100px;
+
+      h2 {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 17px;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+    }
+
+    .products-section-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      
+      .products-section-list-item {
+        list-style: none;
+        text-align: center;
+
+        .products-section-list-item-image {
+          width: 100%;
+          height: 474px;
+          object-fit: cover;
+          object-position: center;
+        }
+
+        h3 {
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 19px;
+          margin-bottom: 8px;
+          margin-top: 40px;
+        }
+  
+        .products-section-list-item-description {
+          font-size: 14px;
+          line-height: 17px;
+          margin-bottom: 20px;
+          color: $light-gray;
+        }
+  
+        .products-section-list-item-price {
+          font-size: 14px;
+          font-weight: 600;
+          line-height: 17px;
+          margin-bottom: 20px;
+        }
+  
+        .products-section-list-item-link {
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 17px;
+          text-decoration: none;
+          color: $text-color;
+          height: 77px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+
+          &:hover {
+            background-color: $light-gray;
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+
+  .about-section {
+    .convictions-container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      height: 646px;
+      align-items: end;
+      background-color: $light-brown;
+
+      .convictions-container-content {
+        width: 50%;
+        padding-left: 40px;
+        padding-bottom: 40px;
+
+        h2 {
+          font-size: 20px;
+          font-weight: 500;
+          line-height: 24px;
+          margin-bottom: 10px;
+          text-transform: uppercase;
+        }
+
+        p {
+          font-size: 14px;
+          font-weight: 300;
+          line-height: 17px;
+        }
+      }
+
+      .convictions-container-image {
+        position: relative;
+        height: 100%;
+
+        img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+
+    .values-container {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      height: 646px;
+      align-items: end;
+      background-color: $light-green;
+      
+      .values-container-content {
+        width: 50%;
+        margin-left: auto;
+        padding-right: 40px;
+        padding-bottom: 40px;
+
+        h2 {
+          font-size: 20px;
+          font-weight: 500;
+          line-height: 24px;
+          margin-bottom: 10px;
+          text-transform: uppercase;
+        }
+
+        p {
+          font-size: 14px;
+          font-weight: 300;
+          line-height: 17px;
+        }
+      }
+
+      .values-container-image {
+        position: relative;
+        height: 100%;
+
+        img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}

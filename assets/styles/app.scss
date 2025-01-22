@@ -3,6 +3,10 @@
   src: url('/fonts/Inter-VariableFont_opsz,wght.ttf') format('truetype');
 }
 
+@import './variables.scss';
+@import './components';
+@import './pages';
+
 * {
   margin: 0;
   padding: 0;
@@ -10,11 +14,19 @@
   font-family: 'Inter';
 }
 
+body {
+  background-color: $background;
+  color: $text-color;
+}
+
+main {
+  min-height: calc(100vh - $header-height - $footer-height);
+}
+
 .auth-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: calc(100vh);
-  background-color: #F6F5F0;
+  min-height: calc(100vh - $header-height - $footer-height);
   height: 100%;
 }
 
@@ -62,7 +74,7 @@ input:not([type="checkbox"]) {
   border: 1px solid #666666;
   padding: 0 20px;
   margin-bottom: 30px;
-  background-color: #F6F5F0;
+  background-color: $background;
 }
 
 input[type="checkbox"] {
