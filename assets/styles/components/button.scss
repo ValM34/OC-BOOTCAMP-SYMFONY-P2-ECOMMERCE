@@ -1,0 +1,15 @@
+.button-primary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 77px;
+  background-color: $button-color;
+  text-decoration: none;
+
+  span {
+    color: $white;
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 400;
+  }
+}

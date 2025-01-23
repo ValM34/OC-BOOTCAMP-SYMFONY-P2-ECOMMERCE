@@ -1,0 +1,96 @@
+.account-main {
+  background-color: $background-secondary;
+  padding-bottom: 78px;
+
+  h1 {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 500;
+    padding: 42px 0;
+    text-align: center;
+  }
+
+  .account-section-orders {
+    max-width: 604px;
+    margin: auto;
+    background-color: $background;
+    padding: 60px;
+    margin-bottom: 15px;
+
+    h2 {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 17px;
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      thead {
+        tr {
+          th {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 17px;
+            color: $light-gray;
+            text-align: left;
+
+            &:nth-child(1) {
+              width:40%;
+            }
+
+            &:nth-child(2) {
+              width: 50%;
+            }
+
+            &:nth-child(3) {
+              width: 10%;
+            }
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          border-bottom: 1px solid $light-brown;
+          height: 66px;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          td {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 17px;
+            text-align: left;
+          }
+        }
+      }
+    }
+  }
+
+  .account-section-api {
+    max-width: 604px;
+    margin: auto;
+    background-color: $background;
+    padding: 60px;
+    margin-bottom: 15px;
+
+    h2 {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 17px;
+      margin-bottom: 30px;
+    }
+  }
+
+  .account-section-delete-account {
+    max-width: 604px;
+    margin: auto;
+    background-color: $background;
+    padding: 60px;
+  }
+}

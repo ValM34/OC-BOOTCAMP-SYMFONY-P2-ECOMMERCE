@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+  <main class="card-main">
+    <section class="card-section">
+        <h1>Mon panier</h1>
+        <a href="#" class="card-section-clear">x Vider le panier</a>
+        <ul class="card-section-products">
+          <li class="card-section-products-item">
+            <div class="card-section-products-item-image">
+              <img src="{{ asset('images/products/product-test.jpg') }}" alt="Product name" />
+            </div>
+            <div class="card-section-products-item-content">
+              <span class="card-section-products-item-content-title">Nécessaire, déodorant Bio</span>
+              <span class="card-section-products-item-content-quantity">Quantité : 1</span>
+              <span class="card-section-products-item-content-price">8,50€</span>
+            </div>
+          </li>
+        </ul>
+        <div class="card-section-total">
+          <div class="card-section-total-price">Total panier : <span>8,50€</span></div>
+          <span class="card-section-total-delivery">Frais de livraison : Offert</span>
+        </div>
+        <a href="#" class="card-section-button">
+          <span>Valider la commande</span>
+        </a>
+    </section>
+  </main>
+{% endblock %}

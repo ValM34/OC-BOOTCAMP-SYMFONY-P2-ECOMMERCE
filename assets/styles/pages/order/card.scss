@@ -1,0 +1,115 @@
+.card-main {
+  background-color: $background-secondary;
+  padding-top: 100px;
+
+  .card-section {
+    max-width: 604px;
+    margin: auto;
+
+    h1 {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 24px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .card-section-clear {
+      display: block;
+      color: $light-gray;
+      font-size: 14px;
+      line-height: 17px;
+      margin-bottom: 17px;
+      text-decoration: none;
+    }
+
+    .card-section-products {
+      .card-section-products-item {
+        background-color: $foreground;
+        padding: 40px;
+        display: flex;
+        gap: 55px;
+        align-items: center;
+        margin-bottom: 5px;
+
+        .card-section-products-item-image {
+          img {
+            width: 142px;
+            height: 132px;
+            object-fit: cover;
+          }
+        }
+
+        .card-section-products-item-content {
+          display: flex;
+          flex-direction: column;
+
+          .card-section-products-item-content-title {
+            font-size: 14px;
+            line-height: 17px;
+            font-weight: 600;
+            margin-bottom: 6px;
+          }
+
+          .card-section-products-item-content-quantity {
+            font-size: 14px;
+            line-height: 17px;
+            font-weight: 400;
+            margin-bottom: 13px;
+            color: $light-gray;
+          }
+
+          .card-section-products-item-content-price {
+            font-size: 18px;
+            line-height: 22px;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+
+    .card-section-total {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      align-items: flex-end;
+      padding: 20px 40px;
+      background-color: $foreground;
+      margin-bottom: 30px;
+
+      .card-section-total-price {
+        font-size: 14px;
+        line-height: 17px;
+        font-weight: 500;
+
+        span {
+          font-size: 20px;
+          line-height: 24px;
+        }
+      }
+      
+      .card-section-total-delivery {
+        font-size: 12px;
+        line-height: 14px;
+        font-weight: 400;
+        color: $light-gray;
+      }
+    }
+
+    .card-section-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 77px;
+      background-color: $button-color;
+      text-decoration: none;
+
+      span {
+        color: $white;
+        font-size: 14px;
+        line-height: 17px;
+        font-weight: 400;
+      }
+    }
+  }
+}
