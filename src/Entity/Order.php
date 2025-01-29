@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Enum\OrderStatus;
 use App\Repository\OrderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -17,18 +16,18 @@ class Order
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(enumType: OrderStatus::class)]
-    private ?OrderStatus $status = null;
-
     #[ORM\ManyToOne(inversedBy: 'orders')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $customer = null;
+    private ?Customer $customer = null;
 
     /**
      * @var Collection<int, OrderedProduct>
      */
     #[ORM\OneToMany(targetEntity: OrderedProduct::class, mappedBy: 'orderItem')]
     private Collection $orderedProducts;
+
+    #[ORM\Column]
+    private ?bool $validated = null;
 
     public function __construct()
     {
@@ -40,24 +39,12 @@ class Order
         return $this->id;
     }
 
-    public function getStatus(): ?OrderStatus
-    {
-        return $this->status;
-    }
-
-    public function setStatus(OrderStatus $status): static
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    public function getCustomer(): ?User
+    public function getCustomer(): ?Customer
     {
         return $this->customer;
     }
 
-    public function setCustomer(?User $customer): static
+    public function setCustomer(?Customer $customer): static
     {
         $this->customer = $customer;
 
@@ -90,6 +77,18 @@ class Order
                 $orderedProduct->setOrderItem(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isValidated(): ?bool
+    {
+        return $this->validated;
+    }
+
+    public function setValidated(bool $validated): static
+    {
+        $this->validated = $validated;
 
         return $this;
     }

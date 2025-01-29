@@ -21,6 +21,9 @@ class OrderedProduct
     #[ORM\JoinColumn(nullable: false)]
     private ?Order $orderItem = null;
 
+    #[ORM\Column]
+    private ?int $quantity = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -46,6 +49,18 @@ class OrderedProduct
     public function setOrderItem(?Order $orderItem): static
     {
         $this->orderItem = $orderItem;
+
+        return $this;
+    }
+
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): static
+    {
+        $this->quantity = $quantity;
 
         return $this;
     }

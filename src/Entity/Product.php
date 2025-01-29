@@ -27,14 +27,14 @@ class Product
     #[ORM\Column]
     private ?int $price = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $picture = null;
-
     /**
      * @var Collection<int, OrderedProduct>
      */
     #[ORM\OneToMany(targetEntity: OrderedProduct::class, mappedBy: 'product')]
     private Collection $orderedProducts;
+
+    #[ORM\Column(length: 255)]
+    private ?string $picturePath = null;
 
     public function __construct()
     {
@@ -94,18 +94,6 @@ class Product
         return $this;
     }
 
-    public function getPicture(): ?string
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(string $picture): static
-    {
-        $this->picture = $picture;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, OrderedProduct>
      */
@@ -132,6 +120,18 @@ class Product
                 $orderedProduct->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPicturePath(): ?string
+    {
+        return $this->picturePath;
+    }
+
+    public function setPicturePath(string $picturePath): static
+    {
+        $this->picturePath = $picturePath;
 
         return $this;
     }

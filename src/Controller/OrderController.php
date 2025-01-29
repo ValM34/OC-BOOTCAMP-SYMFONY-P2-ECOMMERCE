@@ -8,13 +8,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class OrderController extends AbstractController
 {
-  #[Route('/mon-compte', name: 'app_account')]
+  #[Route('/utilisateur/mon-compte', name: 'app_account')]
   public function listOrdersPaid(): Response
   {
     return $this->render('order/list-account.html.twig', []);
   }
 
-  #[Route('/panier', name: 'app_card')]
+  #[Route('/utilisateur/panier', name: 'app_card')]
   public function listOrderInProgress(): Response
   {
     return $this->render('order/list-card.html.twig', []);
