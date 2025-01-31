@@ -4,21 +4,30 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\ProductServiceInterface;
+use App\Entity\Product;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 
 class ProductController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
-    public function index(): Response
+    public function __construct(private ProductServiceInterface $productService)
     {
-        return $this->render('home/home.html.twig', []);
     }
 
-    // #[Route('/product/{id}', name: 'app_product_show')]
-    #[Route('/product/1', name: 'app_product_show')]
-    // public function show(int $id): Response
-    public function show(): Response
+    #[Route(path: '/', name: 'app_home')]
+    public function index(): Response
     {
-        return $this->render('product/show.html.twig', []);
+        $products = $this->productService->list();
+
+        return $this->render(view: 'home/home.html.twig', parameters: ['products' => $products]);
+    }
+
+    #[Route(path: '/product/{id}', name: 'app_product_show')]
+    public function show(Product $product = null): Response
+    {
+        return $this->render(view: 'product/show.html.twig', parameters: ['product' => $product]);
     }
 }

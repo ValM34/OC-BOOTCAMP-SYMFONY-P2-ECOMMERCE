@@ -52,9 +52,9 @@ class AppFixtures extends Fixture
         $products = [];
         for($i = 0; $i < 20; $i++) {
             $product = new Product();
-            $product->setName($faker->name());
+            $product->setName("Product name " . $i);
             $product->setShortDescription($faker->sentence());
-            $product->setFullDescription($faker->paragraph());
+            $product->setFullDescription($faker->paragraph() . $faker->paragraph() . $faker->paragraph());
             $product->setPrice(mt_rand(10, 100));
             $product->setPicturePath('images/products/product-default.jpg');
             $manager->persist($product);

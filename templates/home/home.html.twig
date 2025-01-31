@@ -18,92 +18,30 @@
       </div>
     </section>
     <section class="products-section">
-      <div class="products-section-title-container">
-        <h2>Nos produits</h2>
-      </div>
-      <ul class="products-section-list">
-        <li class="products-section-list-item">
-          <img class="products-section-list-item-image" src="{{ asset('images/products/product-default.jpg') }}" alt="Product 1" />
-          <h3>Kit d&apos;hygiène recyclable</h3>
-          <p class="products-section-list-item-description">Pour une salle de bain éco-friendly</p>
-          <p class="products-section-list-item-price">24,99€</p>
-          <a class="products-section-list-item-link" href="#">
-            <p>Voir le produit</p>
-          </a>
-        </li>
-        <li class="products-section-list-item">
-          <img class="products-section-list-item-image" src="{{ asset('images/products/product-default.jpg') }}" alt="Product 1" />
-          <h3>Kit d&apos;hygiène recyclable</h3>
-          <p class="products-section-list-item-description">Pour une salle de bain éco-friendly</p>
-          <p class="products-section-list-item-price">24,99€</p>
-          <a class="products-section-list-item-link" href="#">
-            <p>Voir le produit</p>
-          </a>
-        </li>
-        <li class="products-section-list-item">
-          <img class="products-section-list-item-image" src="{{ asset('images/products/product-default.jpg') }}" alt="Product 1" />
-          <h3>Kit d&apos;hygiène recyclable</h3>
-          <p class="products-section-list-item-description">Pour une salle de bain éco-friendly</p>
-          <p class="products-section-list-item-price">24,99€</p>
-          <a class="products-section-list-item-link" href="#">
-            <p>Voir le produit</p>
-          </a>
-        </li>
-        <li class="products-section-list-item">
-          <img class="products-section-list-item-image" src="{{ asset('images/products/product-default.jpg') }}" alt="Product 1" />
-          <h3>Kit d&apos;hygiène recyclable</h3>
-          <p class="products-section-list-item-description">Pour une salle de bain éco-friendly</p>
-          <p class="products-section-list-item-price">24,99€</p>
-          <a class="products-section-list-item-link" href="#">
-            <p>Voir le produit</p>
-          </a>
-        </li>
-        <li class="products-section-list-item">
-          <img class="products-section-list-item-image" src="{{ asset('images/products/product-default.jpg') }}" alt="Product 1" />
-          <h3>Kit d&apos;hygiène recyclable</h3>
-          <p class="products-section-list-item-description">Pour une salle de bain éco-friendly</p>
-          <p class="products-section-list-item-price">24,99€</p>
-          <a class="products-section-list-item-link" href="#">
-            <p>Voir le produit</p>
-          </a>
-        </li>
-        <li class="products-section-list-item">
-          <img class="products-section-list-item-image" src="{{ asset('images/products/product-default.jpg') }}" alt="Product 1" />
-          <h3>Kit d&apos;hygiène recyclable</h3>
-          <p class="products-section-list-item-description">Pour une salle de bain éco-friendly</p>
-          <p class="products-section-list-item-price">24,99€</p>
-          <a class="products-section-list-item-link" href="#">
-            <p>Voir le produit</p>
-          </a>
-        </li>
-        <li class="products-section-list-item">
-          <img class="products-section-list-item-image" src="{{ asset('images/products/product-default.jpg') }}" alt="Product 1" />
-          <h3>Kit d&apos;hygiène recyclable</h3>
-          <p class="products-section-list-item-description">Pour une salle de bain éco-friendly</p>
-          <p class="products-section-list-item-price">24,99€</p>
-          <a class="products-section-list-item-link" href="#">
-            <p>Voir le produit</p>
-          </a>
-        </li>
-        <li class="products-section-list-item">
-          <img class="products-section-list-item-image" src="{{ asset('images/products/product-default.jpg') }}" alt="Product 1" />
-          <h3>Kit d&apos;hygiène recyclable</h3>
-          <p class="products-section-list-item-description">Pour une salle de bain éco-friendly</p>
-          <p class="products-section-list-item-price">24,99€</p>
-          <a class="products-section-list-item-link" href="#">
-            <p>Voir le produit</p>
-          </a>
-        </li>
-        <li class="products-section-list-item">
-          <img class="products-section-list-item-image" src="{{ asset('images/products/product-default.jpg') }}" alt="Product 1" />
-          <h3>Kit d&apos;hygiène recyclable</h3>
-          <p class="products-section-list-item-description">Pour une salle de bain éco-friendly</p>
-          <p class="products-section-list-item-price">24,99€</p>
-          <a class="products-section-list-item-link" href="#">
-            <p>Voir le produit</p>
-          </a>
-        </li>
-      </ul>
+      {% if products|length is same as(0) %}
+        <p>Aucun produit trouvé</p>
+      {% else %}
+        <div class="products-section-title-container">
+          <h2>Nos produits</h2>
+        </div>
+        <ul class="products-section-list">
+          {% for product in products %}
+            <li class="products-section-list-item">
+              {% if product.picturePath %}
+                <img class="products-section-list-item-image" src="{{ asset(product.picturePath) }}" alt="{{ product.name }}" />
+              {% else %}
+                <img class="products-section-list-item-image" src="{{ asset('images/products/product-default.jpg') }}" alt="Product 1" />
+              {% endif %}
+              <h3>{{ product.name }}</h3>
+              <p class="products-section-list-item-description">{{ product.shortDescription }}</p>
+              <p class="products-section-list-item-price">{{ product.price }}€</p>
+              <a class="products-section-list-item-link" href="{{ path('app_product_show', { id: product.id }) }}">
+                <p>Voir le produit</p>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
     </section>
     <section class="about-section">
 

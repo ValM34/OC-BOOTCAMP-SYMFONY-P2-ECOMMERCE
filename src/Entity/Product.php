@@ -21,15 +21,12 @@ class Product
     #[ORM\Column(length: 255)]
     private ?string $shortDescription = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 800)]
     private ?string $fullDescription = null;
 
     #[ORM\Column]
     private ?int $price = null;
 
-    /**
-     * @var Collection<int, OrderedProduct>
-     */
     #[ORM\OneToMany(targetEntity: OrderedProduct::class, mappedBy: 'product')]
     private Collection $orderedProducts;
 
@@ -39,6 +36,7 @@ class Product
     public function __construct()
     {
         $this->orderedProducts = new ArrayCollection();
+        $this->name = "";
     }
 
     public function getId(): ?int
@@ -94,9 +92,6 @@ class Product
         return $this;
     }
 
-    /**
-     * @return Collection<int, OrderedProduct>
-     */
     public function getOrderedProducts(): Collection
     {
         return $this->orderedProducts;
