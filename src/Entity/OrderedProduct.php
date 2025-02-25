@@ -4,10 +4,17 @@ namespace App\Entity;
 
 use App\Repository\OrderedProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Trait\CreatedAtTrait;
+use App\Entity\Trait\UpdatedAtTrait;
+use DateTime;
 
 #[ORM\Entity(repositoryClass: OrderedProductRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class OrderedProduct
 {
+    use CreatedAtTrait;
+    use UpdatedAtTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

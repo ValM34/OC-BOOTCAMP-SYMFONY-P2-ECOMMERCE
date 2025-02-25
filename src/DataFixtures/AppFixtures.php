@@ -33,20 +33,19 @@ class AppFixtures extends Fixture
             $customer->setLastName($faker->lastName());
             $manager->persist($customer);
 
-            for($j = 0; $j < mt_rand(1, 5); $j++) {
+            for($j = 0; $j < mt_rand(2, 5); $j++) {
                 $order = new Order();
                 $order->setCustomer($customer);
                 $order->setValidated(true);
                 $manager->persist($order);
-            }
-
-            for($j = 0; $j < mt_rand(0, 1); $j++) {
-                $order = new Order();
-                $order->setCustomer($customer);
-                $order->setValidated(false);
-                $manager->persist($order);
                 $orders[] = $order;
             }
+
+            $order = new Order();
+            $order->setCustomer($customer);
+            $order->setValidated(false);
+            $manager->persist($order);
+            $orders[] = $order;
         }
 
         $products = [];
@@ -62,7 +61,7 @@ class AppFixtures extends Fixture
         }
 
         foreach($orders as $order) {
-            for($i = 0; $i < mt_rand(1, 3); $i++) {
+            for($i = 0; $i < mt_rand(2, 4); $i++) {
                 $orderedProduct = new OrderedProduct();
                 $randomProduct = $products[array_rand($products)];
                 $orderedProduct->setProduct($randomProduct);

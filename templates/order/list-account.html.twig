@@ -16,21 +16,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>01</td>
-            <td>2024-01-01</td>
-            <td>100€</td>
-          </tr>
-          <tr>
-            <td>02</td>
-            <td>2024-01-01</td>
-            <td>100€</td>
-          </tr>
-          <tr>
-            <td>02</td>
-            <td>2024-01-01</td>
-            <td>100€</td>
-          </tr>
+          {% for order in orders %}
+            <tr>
+              <td>{{ order.id }}</td>
+              <td>{{ order.createdAt|date('d/m/Y') }}</td>
+              {% set total = 0 %}
+              {% for orderedProduct in order.orderedProducts %}
+                {% set total = total + orderedProduct.product.price * orderedProduct.quantity %}
+              {% endfor %}
+              <td>{{ total }}€</td>
+            </tr>
+          {% endfor %}
         </tbody>
       </table>
     </section>

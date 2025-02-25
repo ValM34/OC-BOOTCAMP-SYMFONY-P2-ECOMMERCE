@@ -5,18 +5,51 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\OrderRepository;
+use App\Repository\OrderedProductRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Product;
+use App\Entity\Order;
+use App\Entity\OrderedProduct;
 
 class OrderController extends AbstractController
 {
-  #[Route('/utilisateur/mon-compte', name: 'app_account')]
-  public function listOrdersPaid(): Response
+  public function __construct(
+    private OrderRepository $orderRepository,
+    private OrderedProductRepository $orderedProductRepository,
+    private EntityManagerInterface $entityManager
+  )
   {
-    return $this->render('order/list-account.html.twig', []);
   }
 
-  #[Route('/utilisateur/panier', name: 'app_card')]
+  #[Route(path: '/utilisateur/mon-compte', name: 'app_account')]
+  public function listOrdersPaid(): Response
+  {
+    $orders = $this->orderRepository->findByCustomerAndValidated($this->getUser());
+
+    return $this->render('order/list-account.html.twig', ['orders' => $orders]);
+  }
+
+  #[Route(path: '/utilisateur/panier', name: 'app_card')]
   public function listOrderInProgress(): Response
   {
-    return $this->render('order/list-card.html.twig', []);
+    $card = $this->orderRepository->findByCustomer($this->getUser());
+
+    if(!$card) {
+      return $this->render('order/list-card.html.twig');
+    }
+
+    return $this->render('order/list-card.html.twig', ['card' => $card]);
+  }
+
+  #[Route(path: '/utilisateur/panier/vider/{id}', name: 'app_card_clear')]
+  public function clearCard($id): Response
+  {
+    $card = $this->orderRepository->find($id);
+
+    $this->entityManager->remove($card);
+    $this->entityManager->flush();
+
+    return $this->redirectToRoute('app_card');
   }
 }

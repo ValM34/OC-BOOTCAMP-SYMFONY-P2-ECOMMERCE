@@ -15,9 +15,27 @@
                 <p class="product-section-content-description-text">
                   {{ product.fullDescription }}
                 </p>
-                <a href="#" class="product-section-content-button">
-                  <span>Ajouter au panier</span>
-                </a>
+
+                {% if form is not defined %}
+                    <a href="{{ path('app_login') }}" class="product-section-content-button">
+                        <span>Se connecter</span>
+                    </a>
+                {% else %}
+                    <div class="container mt-4">
+                        {{ form_start(form) }}
+                            <div class="mb-3">
+                                {{ form_label(form.quantity, 'Quantité') }}
+                                {{ form_widget(form.quantity, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.quantity) }}
+                            </div>
+
+                            <button type="submit" class="product-section-content-button">
+                                <span>{{ btn_text }}</span>
+                            </button>
+                        {{ form_end(form) }}
+                    </div>
+                {% endif %}
+
             </div>
         </section>
     </main>

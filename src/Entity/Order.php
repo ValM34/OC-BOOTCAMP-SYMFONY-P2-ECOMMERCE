@@ -6,11 +6,17 @@ use App\Repository\OrderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Trait\CreatedAtTrait;
+use App\Entity\Trait\UpdatedAtTrait;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
+#[ORM\HasLifecycleCallbacks]
 class Order
 {
+    use CreatedAtTrait;
+    use UpdatedAtTrait;
+    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -23,7 +29,7 @@ class Order
     /**
      * @var Collection<int, OrderedProduct>
      */
-    #[ORM\OneToMany(targetEntity: OrderedProduct::class, mappedBy: 'orderItem')]
+    #[ORM\OneToMany(targetEntity: OrderedProduct::class, mappedBy: 'orderItem', cascade: ['remove'])]
     private Collection $orderedProducts;
 
     #[ORM\Column]
