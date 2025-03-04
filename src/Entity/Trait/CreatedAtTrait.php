@@ -15,7 +15,7 @@ trait CreatedAtTrait
   }
 
   #[ORM\PrePersist]
-  public function setCreatedAtValue(): void
+  public function setCreatedAt(): void
   {
       $this->createdAt = new \DateTimeImmutable();
   }

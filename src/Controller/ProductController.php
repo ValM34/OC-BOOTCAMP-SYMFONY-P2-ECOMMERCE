@@ -36,7 +36,7 @@ class ProductController extends AbstractController
   }
 
   #[Route(path: '/product/{id}', name: 'app_product_show')]
-  public function show(Product $product = null, Request $request): Response
+  public function show(?Product $product = null, Request $request): Response
   {
     if (!$this->getUser()) {
       return $this->render(view: 'product/show.html.twig', parameters: ['product' => $product]);
@@ -70,7 +70,7 @@ class ProductController extends AbstractController
 
     $orderedProduct = $this->orderedProductRepository->findByProductAndOrder($product, $order);
 
-    if (empty($orderedProduct)) {
+    if (!$orderedProduct) {
       $form = $this->createForm(EditOrderedProductQuantityType::class);
       $form->handleRequest($request);
 
@@ -85,14 +85,29 @@ class ProductController extends AbstractController
       return $this->render(
         view: 'product/show.html.twig',
         parameters: ['product' => $product, 'order' => $order, 'form' => $form->createView(),
-        'btn_text' => 'Ajouter au panier']
+        'btn_text' => 'Mettre à jour']
       );
     }
 
-    $form = $this->createForm(EditOrderedProductQuantityType::class, $orderedProduct[0]);
+    $form = $this->createForm(EditOrderedProductQuantityType::class, $orderedProduct);
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
+      if($orderedProduct->getQuantity() === 0) {
+        $orderedProducts = $this->orderedProductRepository->findByOrder($order);
+        if(count($orderedProducts) === 1) {
+          $this->entityManager->remove($order);
+        } else {
+          $this->entityManager->remove($orderedProduct);
+        }
+        $this->entityManager->flush();
+
+        return $this->render(
+          view: 'product/show.html.twig',
+          parameters: ['product' => $product, 'order' => $order, 'form' => $form->createView(),
+          'btn_text' => 'Ajouter au panier']
+        );
+      }
       $this->entityManager->persist($form->getData());
       $this->entityManager->flush();
     }

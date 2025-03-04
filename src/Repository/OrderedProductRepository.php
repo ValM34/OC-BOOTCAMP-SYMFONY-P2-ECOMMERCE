@@ -18,7 +18,7 @@ class OrderedProductRepository extends ServiceEntityRepository
         parent::__construct($registry, OrderedProduct::class);
     }
 
-    public function findByProductAndOrder(Product $product, Order $order): array
+    public function findByProductAndOrder(Product $product, Order $order): ?OrderedProduct
     {
         return $this->createQueryBuilder('op')
            ->select('op')
@@ -27,7 +27,7 @@ class OrderedProductRepository extends ServiceEntityRepository
            ->setParameter('product', $product)
            ->setParameter('order', $order)
            ->getQuery()
-           ->getResult()
+           ->getOneOrNullResult()
        ;
     }
 

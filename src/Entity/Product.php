@@ -11,8 +11,11 @@ use ApiPlatform\Metadata\GetCollection;
 use App\Entity\Trait\CreatedAtTrait;
 use App\Entity\Trait\UpdatedAtTrait;
 
-#[ApiResource(security: "object.owner == user")]
-#[GetCollection]
+#[ApiResource(
+    operations: [
+        new GetCollection(security: "is_granted('IS_AUTHENTICATED_FULLY')"),
+    ]
+)]
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 class Product

@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Product;
 use App\Entity\Order;
 use App\Entity\OrderedProduct;
-
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 class OrderController extends AbstractController
 {
   public function __construct(
@@ -40,6 +40,24 @@ class OrderController extends AbstractController
     }
 
     return $this->render('order/list-card.html.twig', ['card' => $card]);
+  }
+
+  #[Route(path: '/utilisateur/panier/valider/{id}', name: 'app_card_validate', methods: ['GET'])]
+  public function validateCard($id): Response
+  {
+    $card = $this->orderRepository->find($id);
+
+    if(!$this->isGranted('validate', $card)) {
+      $this->addFlash('error', 'Vous n\'avez pas les droits pour valider cette commande');
+      return $this->redirectToRoute('app_card');
+    }
+
+    $card->setValidated(true);
+    $this->entityManager->flush();
+
+    $this->addFlash('success', 'Commande validée avec succès');
+
+    return $this->redirectToRoute('app_card');
   }
 
   #[Route(path: '/utilisateur/panier/vider/{id}', name: 'app_card_clear')]

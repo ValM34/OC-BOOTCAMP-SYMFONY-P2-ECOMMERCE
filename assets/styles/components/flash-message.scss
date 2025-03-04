@@ -1,0 +1,11 @@
+.error-message-container {
+  background-color: $error-background;
+  color: $error-color;
+  padding: 10px;
+}
+
+.success-message-container {
+  background-color: $success-background;
+  color: $success-color;
+  padding: 10px;
+}

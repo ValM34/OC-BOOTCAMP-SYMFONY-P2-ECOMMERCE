@@ -16,8 +16,8 @@ trait UpdatedAtTrait
 
   #[ORM\PreUpdate]
   #[ORM\PrePersist]
-  public function setUpdatedAtValue(): void
+  public function setUpdatedAt(): void
   {
-      $this->updatedAt = new \DateTimeImmutable();
+    $this->updatedAt = new \DateTimeImmutable();
   }
 }
