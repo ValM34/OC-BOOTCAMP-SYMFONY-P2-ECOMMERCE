@@ -2,23 +2,17 @@
 
 namespace App\Security;
 
-use App\Entity\Order;
 use App\Entity\Customer;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-class OrderValidationVoter extends Voter
+class ApiAccessVoter extends Voter
 {
-  const VALIDATE = 'validate';
+  const API_ACCESS = 'api_access';
 
   protected function supports(string $attribute, mixed $subject): bool
   {
-    // if the attribute isn't one we support, return false
-    if (!in_array($attribute, [self::VALIDATE])) {
-      return false;
-    }
-
-    if (!$subject instanceof Order) {
+    if (!in_array($attribute, [self::API_ACCESS])) {
       return false;
     }
 
@@ -34,17 +28,14 @@ class OrderValidationVoter extends Voter
       return false;
     }
 
-    /** @var Order $order */
-    $order = $subject;
-
     return match ($attribute) {
-      self::VALIDATE => $this->canValidate($order, $customer),
+      self::API_ACCESS => $this->canAccessToApi($customer),
       default => throw new \LogicException('This code should not be reached!')
     };
   }
 
-  private function canValidate(Order $order, Customer $customer): bool
+  private function canAccessToApi(Customer $customer): bool
   {
-    return $customer === $order->getCustomer();
+    return $customer->getApiAccess();
   }
 }

@@ -18,27 +18,51 @@
         {% block form_row %}
             {{ form_label(registrationForm.lastName) }}
             {{ form_widget(registrationForm.lastName) }}
-            {{ form_errors(registrationForm.lastName) }}
+            {% if form_errors(registrationForm.lastName) %}
+                <div class="error-message-container">
+                    {{ form_errors(registrationForm.lastName) }}
+                </div>
+            {% endif %}
 
             {{ form_label(registrationForm.firstName) }}
             {{ form_widget(registrationForm.firstName) }}
-            {{ form_errors(registrationForm.firstName) }}
+            {% if form_errors(registrationForm.firstName) %}
+                <div class="error-message-container">
+                    {{ form_errors(registrationForm.firstName) }}
+                </div>
+            {% endif %}
 
             {{ form_label(registrationForm.email) }}
             {{ form_widget(registrationForm.email) }}
-            {{ form_errors(registrationForm.email) }}
+            {% if form_errors(registrationForm.email) %}
+                <div class="error-message-container">
+                    {{ form_errors(registrationForm.email) }}
+                </div>
+            {% endif %}
 
             {{ form_label(registrationForm.plainPassword.first) }}
             {{ form_widget(registrationForm.plainPassword.first) }}
-            {{ form_errors(registrationForm.plainPassword.first) }}
+            {% if form_errors(registrationForm.plainPassword.first) %}
+                <div class="error-message-container">
+                    {{ form_errors(registrationForm.plainPassword.first) }}
+                </div>
+            {% endif %}
 
             {{ form_label(registrationForm.plainPassword.second) }}
             {{ form_widget(registrationForm.plainPassword.second) }}
-            {{ form_errors(registrationForm.plainPassword.second) }}
+            {% if form_errors(registrationForm.plainPassword.second) %}
+                <div class="error-message-container">
+                    {{ form_errors(registrationForm.plainPassword.second) }}
+                </div>
+            {% endif %}
 
             {{ form_widget(registrationForm.agreeTerms) }}
             {{ form_label(registrationForm.agreeTerms) }}
-            {{ form_errors(registrationForm.agreeTerms) }}
+            {% if form_errors(registrationForm.agreeTerms) %}
+                <div class="error-message-container">
+                    {{ form_errors(registrationForm.agreeTerms) }}
+                </div>
+            {% endif %}
         {% endblock %}
 
         <button type="submit" class="btn">S'inscrire</button>

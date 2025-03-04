@@ -10,10 +10,14 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\GetCollection;
 use App\Entity\Trait\CreatedAtTrait;
 use App\Entity\Trait\UpdatedAtTrait;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ApiResource(
     operations: [
-        new GetCollection(security: "is_granted('IS_AUTHENTICATED_FULLY')"),
+        new GetCollection(
+            security: "is_granted('api_access')",
+            normalizationContext: ['groups' => ['product:read']]
+        ),
     ]
 )]
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
@@ -26,24 +30,30 @@ class Product
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['product:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['product:read'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['product:read'])]
     private ?string $shortDescription = null;
 
     #[ORM\Column(length: 800)]
+    #[Groups(['product:read'])]
     private ?string $fullDescription = null;
 
     #[ORM\Column]
+    #[Groups(['product:read'])]
     private ?int $price = null;
 
     #[ORM\OneToMany(targetEntity: OrderedProduct::class, mappedBy: 'product')]
     private Collection $orderedProducts;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['product:read'])]
     private ?string $picturePath = null;
 
     public function __construct()

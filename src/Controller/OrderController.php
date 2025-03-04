@@ -30,6 +30,15 @@ class OrderController extends AbstractController
     return $this->render('order/list-account.html.twig', ['orders' => $orders]);
   }
 
+  #[Route(path: '/utilisateur/toggle-api-access', name: 'app_toggle_api_access')]
+  public function toggleApiAccess(): Response
+  {
+    $this->getUser()->setApiAccess(!$this->getUser()->getApiAccess());
+    $this->entityManager->flush();
+    
+    return $this->redirectToRoute('app_account');
+  }
+
   #[Route(path: '/utilisateur/panier', name: 'app_card')]
   public function listOrderInProgress(): Response
   {

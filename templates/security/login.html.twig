@@ -24,6 +24,12 @@
                value="{{ csrf_token('authenticate') }}"
         >
 
+        {% if error %}
+            <div class="error-message-container">
+                <p>{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+            </div>
+        {% endif %}
+
         <button class="btn btn-lg btn-primary" type="submit">
             Se connecter
         </button>

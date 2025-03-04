@@ -48,6 +48,9 @@ class Customer implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $lastName = null;
 
+    #[ORM\Column(type: 'boolean')]
+    private bool $apiAccess = false;
+
     /**
      * @var Collection<int, Order>
      */
@@ -184,6 +187,18 @@ class Customer implements UserInterface, PasswordAuthenticatedUserInterface
                 $order->setCustomer(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getApiAccess(): ?bool
+    {
+        return $this->apiAccess;
+    }
+
+    public function setApiAccess(bool $apiAccess): static
+    {
+        $this->apiAccess = $apiAccess;
 
         return $this;
     }

@@ -32,9 +32,15 @@
     </section>
     <section class="account-section-api">
       <h2>Mon accès API</h2>
-      <a href="#" class="button-primary">
-        <span>Activer mon accès API</span>
-      </a>
+      {% if not app.user.apiAccess %}
+        <a href="{{ path('app_toggle_api_access') }}" class="button-primary">
+          <span>Activer mon accès API</span>
+        </a>
+      {% else %}
+        <a href="{{ path('app_toggle_api_access') }}" class="button-primary">
+          <span>Désactiver mon accès API</span>
+        </a>
+      {% endif %}
     </section>
     <section class="account-section-delete-account">
       <a href="#" class="button-primary">
